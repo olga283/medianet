@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: MediaNet
+  datasource:
+    url: jdbc:postgresql://localhost:5433/medianet
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+  jdbc:
+    template:
+      query-timeout: 30
+      fetch-size: 100
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.sql
+    enabled: true
+    drop-first: false
+
+server:
+  port: 8084
+  servlet:
+    contextPath: /medianet
+
+springdoc:
+  api-docs:
+    path: /apidocs
+  show-actuator: true
+
+logging:
+  level:
+    liquibase: INFO
+    org.springframework.jdbc.core: TRACE
